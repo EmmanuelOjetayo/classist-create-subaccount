@@ -4,7 +4,7 @@ import axios from 'axios';
 export default async ({ req, res, log, error }) => {
   // Initialize Appwrite SDK
   const client = new Client()
-    .setEndpoint(process.env.APPWRITE_FUNCTION_ENDPOINT)
+    .setEndpoint("https://fra.cloud.appwrite.io/v1")
     .setProject(process.env.APPWRITE_FUNCTION_PROJECT_ID)
     .setKey(process.env.APPWRITE_API_KEY);
 
