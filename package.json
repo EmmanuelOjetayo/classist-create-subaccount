@@ -1,14 +1,10 @@
 {
-  "name": "create-subaccount",
+  "name": "classist-onboarding",
   "version": "1.0.0",
-  "description": "Securely creates Flutterwave subaccounts for Classist Admins",
-  "main": "src/main.js",
   "type": "module",
+  "main": "src/main.js",
   "dependencies": {
+    "node-appwrite": "^14.1.0",
     "axios": "^1.6.0"
-  },
-  "devDependencies": {},
-  "scripts": {
-    "start": "node src/main.js"
   }
 }
