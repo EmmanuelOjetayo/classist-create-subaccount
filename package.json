@@ -1,10 +1,10 @@
 {
-  "name": "classist-onboarding",
+  "name": "appwrite-flutterwave-subaccount",
   "version": "1.0.0",
   "type": "module",
   "main": "src/main.js",
   "dependencies": {
-    "node-appwrite": "^14.1.0",
-    "axios": "^1.6.0"
+    "node-appwrite": "^13.0.0",
+    "node-fetch": "^3.3.2"
   }
 }
