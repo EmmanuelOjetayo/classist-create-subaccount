@@ -33,8 +33,8 @@ export default async ({ req, res, log, error }) => {
       business_contact_mobile,
       business_mobile,
       country = "NG",
-      split_type: "flat",
-      split_value: 100, 
+      split_type = "flat", 
+      split_value = 100,
       userId,
     } = body;
 
