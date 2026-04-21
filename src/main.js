@@ -1,4 +1,4 @@
-import { Client, Databases, Users } from "node-appwrite";
+import { Client, Databases, Users, Query} from "node-appwrite";
 import fetch from "node-fetch";
 
 export default async ({ req, res, log, error }) => {
@@ -116,23 +116,35 @@ export default async ({ req, res, log, error }) => {
 
     const subaccount = subaccountData.data;
 
-    // ─── 6. SAVE TO APPWRITE DB ─────────────────────────────────────────
-    log(`DB_UPDATE: Saving subaccount for user ${userId}`);
+// ─── 6. SAVE TO APPWRITE DB ─────────────────────────────────────────
+log(`DB_QUERY: Finding document where studentId = ${userId}`);
 
-    await databases.updateDocument(
-      DATABASE_ID,
-      ADMIN_COLLECTION_ID,
-      userId,
-      {
-        subaccount_id: subaccount.subaccount_id,
-        account_number,
-        bank_code: account_bank,
-        account_name: resolvedName,
-        business_name,
-        business_email,
-      }
-    );
+const queryResult = await databases.listDocuments(
+  DATABASE_ID,
+  ADMIN_COLLECTION_ID,
+  [Query.equal("studentId", userId)]  // ← query by the studentId field
+);
 
+if (queryResult.total === 0) {
+  return res.json({ success: false, message: "Admin profile not found." }, 404);
+}
+
+const docId = queryResult.documents[0].$id;  // ← get the actual document ID
+log(`DB_UPDATE: Updating document ${docId}`);
+
+await databases.updateDocument(
+  DATABASE_ID,
+  ADMIN_COLLECTION_ID,
+  docId,                               // ← use real doc ID, not userId
+  {
+    subaccount_id: subaccount.subaccount_id,
+    account_number,
+    bank_code: account_bank,
+    account_name: resolvedName,
+    business_name,
+    business_email,
+  }
+);
     log("SUCCESS: Subaccount created and saved.");
 
     return res.json({
