@@ -32,7 +32,7 @@ export default async ({ req, res, log, error }) => {
       business_contact,
       business_contact_mobile,
       business_mobile,
-      country,
+      country = "NG", 
       userId,
     } = body;
 
@@ -40,8 +40,7 @@ export default async ({ req, res, log, error }) => {
     const required = {
       account_bank, account_number, business_name,
       business_email, business_contact,
-      business_contact_mobile, business_mobile,
-      split_type, split_value, userId
+      business_contact_mobile, business_mobile, userId
     };
 
     for (const [key, val] of Object.entries(required)) {
