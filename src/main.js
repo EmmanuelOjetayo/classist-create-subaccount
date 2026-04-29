@@ -149,7 +149,6 @@ await databases.updateDocument(
   DATABASE_ID,
   COURSE_COLLECTION_ID,
   [
-    Query.equal("classCode", classCode),
     Query.equal("assignedRepId", userId)
   ]
 );
