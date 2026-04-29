@@ -14,6 +14,7 @@ export default async ({ req, res, log, error }) => {
   const FLW_SECRET_KEY = process.env.FLW_SECRET_KEY;
   const DATABASE_ID = process.env.DATABASE_ID;
   const ADMIN_COLLECTION_ID = process.env.ADMIN_COLLECTION_ID;
+  const COURSE_COLLECTION_ID = process.env.COURSE_COLLECTION_ID; 
 
   try {
     // ─── 2. PARSE BODY ──────────────────────────────────────────────────
@@ -34,6 +35,7 @@ export default async ({ req, res, log, error }) => {
       business_mobile,
       country = "NG", 
       userId,
+      manual_fee,
     } = body;
 
     // ─── 3. VALIDATE REQUIRED FIELDS ────────────────────────────────────
@@ -99,6 +101,7 @@ export default async ({ req, res, log, error }) => {
         business_contact_mobile,
         business_mobile,
         country,
+        manual_fee,
         split_type: "flat", 
         split_value: 100, 
       }),
