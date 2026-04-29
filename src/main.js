@@ -145,6 +145,29 @@ await databases.updateDocument(
     business_email,
   }
 );
+    const coursesRes = await databases.listDocuments(
+  DATABASE_ID,
+  COURSE_COLLECTION_ID,
+  [
+    Query.equal("classCode", classCode),
+    Query.equal("assignedRepId", userId)
+  ]
+);
+
+log(`COURSES_FOUND: ${coursesRes.total} courses to update`);
+
+await Promise.all(
+  coursesRes.documents.map((course) =>
+    databases.updateDocument(
+      DATABASE_ID,
+      COURSE_COLLECTION_ID,
+      course.$id,
+      { course_manual_fee: manual_fee }
+    )
+  )
+);
+
+log(`COURSES_UPDATED: manualFee set to ${manual_fee} on ${coursesRes.total} courses`);
     log("SUCCESS: Subaccount created and saved.");
 
     return res.json({
