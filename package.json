@@ -1,10 +1,17 @@
 {
-  "name": "appwrite-flutterwave-subaccount",
+  "name": "classist-payment-handler",
   "version": "1.0.0",
-  "type": "module",
+  "description": "Appwrite function: subaccount creation, pay-now, and per-course serial number assignment for Classist",
   "main": "src/main.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js"
+  },
   "dependencies": {
     "node-appwrite": "^13.0.0",
     "node-fetch": "^3.3.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }
